@@ -7,6 +7,7 @@ import (
 const (
 	meanEarthRadKm  = 6371.0
 	meanEarthDiamKm = meanEarthRadKm * 2
+	toRadians = math.Pi / 180
 )
 
 // The point struct represents a geographic location specified by a latitude, longitude coordinate pair.
@@ -21,18 +22,20 @@ func (p *point) equals(p2 point) bool {
 
 // toRad converts an angle from degrees to radians.
 func toRad(deg float64) float64 {
-	return deg * math.Pi / 180
-}
-
-func haversinFunc(a float64) float64 {
-	return 0.5 * (1 - math.Cos(a))
+	return deg * toRadians
 }
 
 // haversinDist calculates the haversine distance between two lat, lng points.
 func haversinDist(x, y point) float64 {
-	sqrt := math.Sqrt(haversinFunc(y.lat-x.lat) + math.Cos(x.lat)*math.Cos(y.lat)*haversinFunc(y.lng-x.lng))
+	dLat := toRad(y.lat - x.lat)
+	dLng := toRad(y.lng - x.lng)
+	latX := toRad(x.lat)
+	latY := toRad(y.lat)
 
-	return meanEarthDiamKm * math.Asin(sqrt)
+	a := math.Pow(math.Sin(dLat / 2), 2) + math.Pow(math.Sin(dLng / 2), 2) * math.Cos(latX) * math.Cos(latY)
+	c := 2 * math.Asin(math.Sqrt(a))
+
+	return meanEarthRadKm * c
 }
 
 // distToLine calculates the shortest distance from a point to a line. The parameters start and end are the start and
@@ -69,9 +72,9 @@ func distToLine(pt, start, end point) float64 {
 
 func handleCrossPrimeMerid(lng float64) float64 {
 	if lng > 180.0 || lng < -180.0 {
-		sign := 1
+		sign := 1.0
 		if math.Signbit(lng) {
-			sign = -1
+			sign = -1.0
 		}
 
 		return ((lng * sign) - 360.0) * sign
