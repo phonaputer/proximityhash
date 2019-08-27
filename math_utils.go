@@ -5,9 +5,9 @@ import (
 )
 
 const (
-	meanEarthRadKm  = 6371.0
-	meanEarthDiamKm = meanEarthRadKm * 2
-	toRadians = math.Pi / 180
+	meanEarthRadKm = 6371.0
+	toRadians      = math.Pi / 180
+	kmToMeters     = 1000
 )
 
 // The point struct represents a geographic location specified by a latitude, longitude coordinate pair.
@@ -32,10 +32,10 @@ func haversinDist(x, y point) float64 {
 	latX := toRad(x.lat)
 	latY := toRad(y.lat)
 
-	a := math.Pow(math.Sin(dLat / 2), 2) + math.Pow(math.Sin(dLng / 2), 2) * math.Cos(latX) * math.Cos(latY)
+	a := math.Pow(math.Sin(dLat/2), 2) + math.Pow(math.Sin(dLng/2), 2)*math.Cos(latX)*math.Cos(latY)
 	c := 2 * math.Asin(math.Sqrt(a))
 
-	return meanEarthRadKm * c
+	return (meanEarthRadKm * c) * kmToMeters
 }
 
 // distToLine calculates the shortest distance from a point to a line. The parameters start and end are the start and
