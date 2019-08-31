@@ -67,7 +67,7 @@ func filterAlreadyChecked(toFilter []string, alreadyChecked map[string]bool) []s
 	return res
 }
 
-// The FindGeohashesWithinRadius function finds all geohashes within the given radius of the given (lat, lng)
+// The FindGeohashesWithinRadius function finds all geohashes within the given radius (in meters) of the given (lat, lng)
 // coordinate point. The geohashes will have the given precision. Geohashes which are 100% inside the radius will be in
 // the fullMatches return value. Geohashes which lie partially but not fully within the radius will be in the
 // partialMatches return value.
