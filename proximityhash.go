@@ -99,5 +99,9 @@ func FindGeohashesWithinRadius(lat, lng, radius float64, precision uint) (fullMa
 		}
 	}
 
+	if len(fullMatches) < 1 && len(partialMatches) < 1 {
+		partialMatches = append(partialMatches, firstHash)
+	}
+
 	return fullMatches, partialMatches
 }
