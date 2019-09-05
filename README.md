@@ -14,7 +14,7 @@ partially within the radius. On a map, the results would look like a (rough) cir
 geohashes which fully match (with the origin point lying at the circle's center)
 with a ring of partially matching geohashes around the perimeter of the circle.
 
-**Important Disclaimer: I only guarantee that this library works in Japan, which is where I use it!**
+**Important Disclaimer: I only guarantee that this library works in Japan, which is where I use it! So make sure you test your own use case!**
 
 ### Usage
 You can download this package using go get: 
