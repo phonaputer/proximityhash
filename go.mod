@@ -1,4 +1,4 @@
-module proximityhash
+module github.com/phonaputer/proximityhash
 
 go 1.14
 
