@@ -1,5 +1,4 @@
 ## ProximityHash: Geohashes in Proximity to a Point
-* *Ported from the [ProximityHash project](https://github.com/ashwin711/proximityhash) created by ashwin711*
 
 [Geohash](https://en.wikipedia.org/wiki/Geohash) is a geocoding system invented by Gustavo Niemeyer and placed into the
 public domain. It is a hierarchical spatial data structure which subdivides space
